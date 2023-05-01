@@ -1,1 +1,1 @@
-export const conectionHttps = 'http://localhost:8000/';
+export const conectionHttp = 'http://localhost:8000/';

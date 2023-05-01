@@ -1,15 +1,45 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import { conectionHttps } from '../../http';
+import { useEffect, useState } from 'react';
+import { conectionHttp } from '../../http';
+import style from './Inicio.module.css';
 
 export default function Inicio() {
+	const [data, setData] = useState([]);
+	const [pratos, setPratos] = useState([]);
 	useEffect(() => {
-		console.log(conectionHttps);
 		axios
-			.get(`${conectionHttps}api/v2/restaurantes/`)
-			.then((response) => console.log(response.data))
+			.get(`${conectionHttp}api/v2/restaurantes/`)
+			.then((response) => setData(response.data))
+			.catch((error) => console.log(error));
+
+		axios
+			.get(`${conectionHttp}api/v2/pratos/`)
+			.then((response) => {
+				setPratos(response.data);
+			})
 			.catch((error) => console.log(error));
 	}, []);
 
-	return <h3>ola mundo</h3>;
+	return (
+		<div className={style.container}>
+			{data.map((restautante) => {
+				return (
+					<div key={restautante.id} className={style.restaurante}>
+						<h3>{restautante.nome}</h3>
+						{pratos.map((pratos) => {
+							if (pratos.restaurante === restautante.id)
+								return (
+									<div className={style.pratos}>
+										<h4 key={pratos.id}>
+											* {pratos.nome} - {pratos.tag}
+										</h4>
+										<p>{pratos.descricao}</p>
+									</div>
+								);
+						})}
+					</div>
+				);
+			})}
+		</div>
+	);
 }

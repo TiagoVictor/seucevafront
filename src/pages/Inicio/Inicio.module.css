@@ -1,0 +1,33 @@
+.container {
+    margin: 50PX;
+}
+
+.restaurante {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: lightgray;
+}
+
+.restaurante h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.pratos {
+    margin-left: 25px;
+}
+
+.pratos h4 {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.pratos p {
+    margin-left: 25px;
+    font-size: 16px;
+}
