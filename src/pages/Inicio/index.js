@@ -9,7 +9,10 @@ export default function Inicio() {
 	useEffect(() => {
 		axios
 			.get(`${conectionHttp}api/v2/restaurantes/`)
-			.then((response) => setData(response.data))
+			.then((response) => {
+				setData(response.data);
+				console.log(response);
+			})
 			.catch((error) => console.log(error));
 
 		axios
@@ -29,9 +32,9 @@ export default function Inicio() {
 						{pratos.map((pratos) => {
 							if (pratos.restaurante === restautante.id)
 								return (
-									<div className={style.pratos}>
-										<h4 key={pratos.id}>
-											* {pratos.nome} - {pratos.tag}
+									<div className={style.pratos} key={pratos.id + pratos.nome}>
+										<h4>
+											{pratos.nome} - {pratos.tag}
 										</h4>
 										<p>{pratos.descricao}</p>
 									</div>
